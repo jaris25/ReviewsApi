@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Reviews.Data.Entities
 {
-    class Review
+    public class Review
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

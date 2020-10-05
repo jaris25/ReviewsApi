@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Reviews.Data.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,16 @@ namespace Reviews.API.Controllers
     [Route("api/items")]
     public class ItemsController: ControllerBase
     {
-        
+        private readonly ReviewsContext _context;
+
+        public ItemsController(ReviewsContext context)
+        {
+            _context = context;
+        }
+        [HttpGet]
+        public IActionResult TEST()
+        {
+            return Ok();
+        }
     }
 }
