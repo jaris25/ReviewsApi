@@ -13,6 +13,7 @@ namespace Reviews.Data.Entities
         public int Id { get; set; }
         public string Feedback { get; set; }
         [Required]
+        [Range(1,10, ErrorMessage = "Rating value must be between 1 and 10")]
         public int Rating { get; set; }
         [ForeignKey("ItemId")]
         public Item Item { get; set; }

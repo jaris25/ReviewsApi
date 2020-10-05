@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Reviews.Data.Contexts;
+using Reviews.Data.Services;
 
 namespace Reviews.API
 {
@@ -30,7 +31,8 @@ namespace Reviews.API
             services.AddDbContext<ReviewsContext>(o => 
             {
                 o.UseSqlServer(connectionString);
-            }); 
+            });
+            services.AddTransient<IItemRepository, ItemRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
