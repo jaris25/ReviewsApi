@@ -1,0 +1,4 @@
+D:\DefaultFiles\Projects\ReviewsApp\Reviews.Data\bin\Debug\netstandard2.1\Reviews.Data.deps.json
+D:\DefaultFiles\Projects\ReviewsApp\Reviews.Data\bin\Debug\netstandard2.1\Reviews.Data.dll
+D:\DefaultFiles\Projects\ReviewsApp\Reviews.Data\obj\Debug\netstandard2.1\Reviews.Data.AssemblyInfoInputs.cache
+D:\DefaultFiles\Projects\ReviewsApp\Reviews.Data\obj\Debug\netstandard2.1\Reviews.Data.AssemblyInfo.cs

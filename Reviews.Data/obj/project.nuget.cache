@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "pCOnnzJMnwVuespvg3tCRzuMME7XIN19JGAfHR8/PCKzft8Qi0n12HKBhPtfEQi3KDFYVFr+6vK0uSUg9gKtDA==",
+  "success": true,
+  "projectFilePath": "D:\\DefaultFiles\\Projects\\ReviewsApp\\Reviews.Data\\Reviews.Data.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jarolsav\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
