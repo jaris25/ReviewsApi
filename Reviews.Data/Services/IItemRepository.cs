@@ -9,7 +9,6 @@ namespace Reviews.Data.Services
     public interface IItemRepository
     {
         Task<Item> GetByNameAsync(string name);
-        Task<IEnumerable<Item>> GetByReviewRatingAsync(int reviewRating);
         Task<IEnumerable<Item>> GetByAverageReviewRatingGreaterThanAsync(double reviewRating);
         Task<IEnumerable<Review>> GetReviewsByNameAsync(string name);
         Task LeaveReviewAsync(string name, Review review);
