@@ -10,9 +10,9 @@ namespace Reviews.Data.Services
     {
         Task<Item> GetByNameAsync(string name);
         Task<IEnumerable<Item>> GetByReviewRatingAsync(int reviewRating);
-        Task<IEnumerable<Item>> GetByAverageReviewRatingAsync(double reviewRating);
+        Task<IEnumerable<Item>> GetByAverageReviewRatingGreaterThanAsync(double reviewRating);
         Task<IEnumerable<Review>> GetReviewsByNameAsync(string name);
-        Task LeaveReviewAsync(int itemId, Review review);
+        Task LeaveReviewAsync(string name, Review review);
         bool ItemExists(string name);
     }
 }

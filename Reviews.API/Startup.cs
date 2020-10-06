@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,11 +29,15 @@ namespace Reviews.API
         {
             var connectionString = _configuration["ConnectionString:reviewsConnectionString"];
             services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddDbContext<ReviewsContext>(o => 
+            services.AddDbContext<ReviewsContext>(o =>
             {
                 o.UseSqlServer(connectionString);
             });
             services.AddTransient<IItemRepository, ItemRepository>();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

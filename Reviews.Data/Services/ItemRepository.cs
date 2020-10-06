@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Reviews.Data.Contexts;
 using Reviews.Data.Entities;
+using Reviews.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Reviews.Data.Services
@@ -17,21 +19,24 @@ namespace Reviews.Data.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Item>> GetByAverageReviewRatingAsync(double reviewRating)
+        public async Task<IEnumerable<Item>> GetByAverageReviewRatingGreaterThanAsync(double reviewRating)
         {
-            var items = await _context.Items.Select(i => i).Where(i => i.Reviews.Average(r => r.Rating) >= reviewRating).ToListAsync();
+            var items = await _context.Items.Include(i => i.Reviews)
+                .Where(i => i.Reviews.Average(r => r.Rating) >= reviewRating).ToListAsync();
             return items;
         }
 
         public Task<Item> GetByNameAsync(string name)
         {
-            var result = _context.Items.Where(i => i.Name.ToLower() == name).FirstOrDefault();
+            var result = _context.Items.Include(i => i.Reviews).Where(i => i.Name.ToLower() == name).FirstOrDefault();
             return Task.FromResult(result);
         }
 
         public async Task<IEnumerable<Item>> GetByReviewRatingAsync(int reviewRating)
         {
-            return await _context.Reviews.Where(r => r.Rating >= reviewRating).Select(r => r.Item).ToListAsync();
+            var a = _context.Items.Include(i => i.Reviews).Where(i => i.Reviews.Average(r => r.Rating)>reviewRating).Select(i => i);
+            // return await _context.Reviews.Where(r => r.Rating >= reviewRating).Select(r => r.Item).ToListAsync();
+            return a;
         }
 
         public async Task<IEnumerable<Review>> GetReviewsByIdAsync(int itemId)
@@ -49,10 +54,11 @@ namespace Reviews.Data.Services
             return _context.Items.Any(i => i.Name.ToLower() == name);
         }
 
-        public async Task LeaveReviewAsync(int itemId, Review review)
+        public async Task LeaveReviewAsync(string name, Review review)
         {
-            var item = _context.Items.Where(i => i.Id == itemId).FirstOrDefault();
+            var item = _context.Items.Where(i => i.Name.ToLower() == name.ToLower()).FirstOrDefault();
             await Task.Run(() => item.Reviews.Add(review));
+            _context.SaveChanges();
         }
     }
 }

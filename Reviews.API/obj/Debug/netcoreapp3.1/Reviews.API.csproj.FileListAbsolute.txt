@@ -30,8 +30,6 @@ D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\Microsof
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
-D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\obj\Debug\netcoreapp3.1\Reviews.API.csproj.CoreCompileInputs.cache
-D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\obj\Debug\netcoreapp3.1\Reviews.API.MvcApplicationPartsAssemblyInfo.cache
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\obj\Debug\netcoreapp3.1\Reviews.API.csproj.CopyComplete
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\obj\Debug\netcoreapp3.1\Reviews.API.dll
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\obj\Debug\netcoreapp3.1\Reviews.API.pdb
@@ -60,3 +58,10 @@ D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\runtimes
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\Reviews.Data.dll
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\Reviews.Data.pdb
+D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\AutoMapper.dll
+D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\obj\Debug\netcoreapp3.1\Reviews.API.csproj.CoreCompileInputs.cache
+D:\DefaultFiles\Projects\ReviewsApp\Reviews.API\obj\Debug\netcoreapp3.1\Reviews.API.MvcApplicationPartsAssemblyInfo.cache

@@ -15,6 +15,6 @@ namespace Reviews.Data.Entities
         [Required]
         public string Name { get; set; }
 
-        public ICollection<Review> Reviews { get; set; }
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }
