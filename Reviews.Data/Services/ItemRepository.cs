@@ -26,15 +26,17 @@ namespace Reviews.Data.Services
             return items;
         }
 
-        public Task<Item> GetByNameAsync(string name)
+        public async Task<IEnumerable<Item>> GetByAverageReviewRatingLowerThanAsync(double reviewRating)
         {
-            var result = _context.Items.Include(i => i.Reviews).Where(i => i.Name.ToLower() == name).FirstOrDefault();
-            return Task.FromResult(result);
+            var items = await _context.Items.Include(i => i.Reviews)
+                .Where(i => i.Reviews.Average(r => r.Rating) <= reviewRating).ToListAsync();
+            return items;
         }
 
-        public async Task<IEnumerable<Review>> GetReviewsByIdAsync(int itemId)
+        public async Task<Item> GetByNameAsync(string name)
         {
-            return await _context.Reviews.Where(r => r.ItemId == itemId).Select(r => r).ToListAsync();
+            var result = _context.Items.Include(i => i.Reviews).Where(i => i.Name.ToLower() == name).FirstOrDefault();
+            return await Task.FromResult(result);
         }
 
         public async Task<IEnumerable<Review>> GetReviewsByNameAsync(string name)

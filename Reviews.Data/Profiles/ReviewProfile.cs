@@ -12,6 +12,7 @@ namespace Reviews.Data.Profiles
         public ReviewProfile()
         {
             CreateMap<ReviewForCreationDto, Review>();
+            CreateMap<Review, ReviewDto>();
         }
     }
 }

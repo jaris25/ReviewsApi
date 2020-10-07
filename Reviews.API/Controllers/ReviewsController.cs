@@ -5,6 +5,7 @@ using Reviews.Data.Entities;
 using Reviews.Data.Models;
 using Reviews.Data.Services;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Reviews.API.Controllers
@@ -14,18 +15,18 @@ namespace Reviews.API.Controllers
     public class ReviewsController: ControllerBase
     {
         private readonly IItemRepository _itemRepository;
-        private readonly ILogger<ItemsController> _logger;
+        private readonly ILogger<ReviewsController> _logger;
         private readonly IMapper _mapper;
 
-        public ReviewsController(IItemRepository itemRepository, ILogger<ItemsController> logger, IMapper mapper)
+        public ReviewsController(IItemRepository itemRepository, ILogger<ReviewsController> logger, IMapper mapper)
         {
             _itemRepository = itemRepository;
             _logger = logger;
             _mapper = mapper;
         }
 
-        [HttpGet("average/{rating}")]
-        public async Task<IActionResult> GetReviewByAverageRating(double rating)
+        [HttpGet("averageGreater/{rating}")]
+        public async Task<IActionResult> GetReviewByAverageRatingGreaterThan(double rating)
         {
             try
             {
@@ -39,6 +40,22 @@ namespace Reviews.API.Controllers
             }
         }
 
+        [HttpGet("averageLower/{rating}")]
+        public async Task<IActionResult> GetReviewByAverageRatingLowerThan(double rating)
+        {
+            try
+            {
+                var items = await _itemRepository.GetByAverageReviewRatingLowerThanAsync(rating);
+                return Ok(items);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical($"Exception occured while getting reviews average", ex);
+                return StatusCode(500, "A problem happened while handling your request.");
+            }
+        }
+
+
         [HttpGet("{name}/reviews")]
         public async Task<IActionResult> GetReviewByName(string name)
         {
@@ -50,7 +67,8 @@ namespace Reviews.API.Controllers
                     return NotFound();
                 }
                 var reviews = await _itemRepository.GetReviewsByNameAsync(name);
-                return Ok(reviews);
+                var reviewsDtos = _mapper.Map <List<ReviewDto>>(reviews);
+                return Ok(reviewsDtos);
             }
             catch (Exception ex)
             {

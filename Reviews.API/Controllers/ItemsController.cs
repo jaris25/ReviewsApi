@@ -13,12 +13,11 @@ namespace Reviews.API.Controllers
     {
         private readonly IItemRepository _itemRepository;
         private readonly ILogger<ItemsController> _logger;
-        private readonly IMapper _mapper;
-        public ItemsController(IItemRepository itemRepository, ILogger<ItemsController> logger, IMapper mapper)
+
+        public ItemsController(IItemRepository itemRepository, ILogger<ItemsController> logger)
         {
             _itemRepository = itemRepository;
             _logger = logger;
-            _mapper = mapper;
         }
 
         [HttpGet("{name}")]
@@ -28,7 +27,7 @@ namespace Reviews.API.Controllers
             {
                 if (!_itemRepository.ItemExists(name))
                 {
-                    _logger.LogInformation($"Sorry, {name} item doesn't exist");
+                    _logger.LogInformation($"Tried to acces {name}, this item doesn't exist");
                     return NotFound();
                 }
                 var item = await _itemRepository.GetByNameAsync(name);
