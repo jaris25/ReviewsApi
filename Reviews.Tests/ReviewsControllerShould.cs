@@ -35,7 +35,7 @@ namespace Reviews.Tests
             _repository.Setup(m => m.ItemExists(name)).Returns(true);
             _repository.Setup(m => m.GetReviewsByNameAsync(name)).Returns(Task.FromResult(reviews));
 
-            var okResult = await _controller.GetReviewByName(name) as OkObjectResult;
+            var okResult = await _controller.GetReviewsByItemName(name) as OkObjectResult;
 
             Assert.Equal(200, okResult.StatusCode);
         }

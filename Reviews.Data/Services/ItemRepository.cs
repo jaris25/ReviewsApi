@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Reviews.Data.Contexts;
 using Reviews.Data.Entities;
-using Reviews.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Reviews.Data.Services

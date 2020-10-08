@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Reviews.Data.Models
+﻿namespace Reviews.Data.Models
 {
     public class ReviewDto
     {

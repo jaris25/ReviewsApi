@@ -57,7 +57,7 @@ namespace Reviews.API.Controllers
 
 
         [HttpGet("{name}/reviews")]
-        public async Task<IActionResult> GetReviewByName(string name)
+        public async Task<IActionResult> GetReviewsByItemName(string name)
         {
             try
             {
