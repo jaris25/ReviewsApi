@@ -66,7 +66,7 @@ namespace Reviews.API.Controllers
                     _logger.LogInformation($"Sorry, {name} item doesn't exist");
                     return NotFound();
                 }
-                var reviews = await _itemRepository.GetReviewsByNameAsync(name);
+                var reviews = await _itemRepository.GetReviewsByItemNameAsync(name);
                 var reviewsDtos = _mapper.Map <List<ReviewDto>>(reviews);
                 return Ok(reviewsDtos);
             }
@@ -91,6 +91,7 @@ namespace Reviews.API.Controllers
 
             var reviewForCreation = _mapper.Map<Review>(review);
             await _itemRepository.LeaveReviewAsync(name, reviewForCreation);
+            _logger.LogInformation($"Review created for item:{name}");
 
             return Ok();
         }

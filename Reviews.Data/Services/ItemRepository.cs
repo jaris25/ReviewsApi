@@ -37,7 +37,7 @@ namespace Reviews.Data.Services
             return await Task.FromResult(result);
         }
 
-        public async Task<IEnumerable<Review>> GetReviewsByNameAsync(string name)
+        public async Task<IEnumerable<Review>> GetReviewsByItemNameAsync(string name)
         {
             return await _context.Reviews.Where(r => r.Item.Name.ToLower() == name).ToListAsync();
         }

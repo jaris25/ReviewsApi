@@ -158,4 +158,5 @@ D:\DefaultFiles\Projects\ReviewsApp\Reviews.Tests\bin\Debug\netcoreapp3.1\Castle
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.Tests\bin\Debug\netcoreapp3.1\Moq.dll
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.Tests\obj\Debug\netcoreapp3.1\Reviews.Tests.dll
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.Tests\obj\Debug\netcoreapp3.1\Reviews.Tests.pdb
+D:\DefaultFiles\Projects\ReviewsApp\Reviews.Tests\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.dll
 D:\DefaultFiles\Projects\ReviewsApp\Reviews.Tests\obj\Debug\netcoreapp3.1\Reviews.Tests.csproj.CoreCompileInputs.cache

@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Reviews.API.Controllers;
+using Reviews.Data.Contexts;
 using Reviews.Data.Entities;
 using Reviews.Data.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -14,66 +17,83 @@ namespace Reviews.Tests
     public class ReviewsControllerShould
     {
         private readonly Mock<ILogger<ReviewsController>> _mockLogger;
-        private readonly ReviewsController _controller;
-        private readonly Mock<IItemRepository> _repository;
         private readonly Mock<IMapper> _mapper;
 
         public ReviewsControllerShould()
         {
             _mockLogger = new Mock<ILogger<ReviewsController>>();
-            _repository = new Mock<IItemRepository>();
             _mapper = new Mock<IMapper>();
-            _controller = new ReviewsController(_repository.Object, _mockLogger.Object, _mapper.Object);
         }
 
         [Fact]
         public async Task GetReviewsByNameReturnsReviews()
         {
-            string name = "a";
-            IEnumerable<Review> reviews = new List<Review>() { new Review { Rating = 9 } };
+            var options = new DbContextOptionsBuilder<ReviewsContext>()
+           .UseInMemoryDatabase(databaseName: $"ItemsDatabase{Guid.NewGuid()}")
+          .Options;
 
-            _repository.Setup(m => m.ItemExists(name)).Returns(true);
-            _repository.Setup(m => m.GetReviewsByNameAsync(name)).Returns(Task.FromResult(reviews));
+            using (var context = new ReviewsContext(options))
+            {
 
-            var okResult = await _controller.GetReviewsByItemName(name) as OkObjectResult;
+                context.Items.Add(new Item { Name = "item", Reviews = new List<Review>() { new Review { Feedback = "smth", Rating = 3 } } });
+                context.SaveChanges();
+            }
 
-            Assert.Equal(200, okResult.StatusCode);
+            using (var context = new ReviewsContext(options))
+            {
+                ItemRepository repo = new ItemRepository(context);
+                var _controller = new ReviewsController(repo, _mockLogger.Object, _mapper.Object);
+                var okResult = await _controller.GetReviewsByItemName("item") as OkObjectResult;
+                Assert.Equal(200, okResult.StatusCode);
+            }
         }
 
         [Fact]
         public async Task GetReviewsWithGreaterRatingReturnsReviews()
         {
-            Item item = new Item
+
+            var options = new DbContextOptionsBuilder<ReviewsContext>()
+                .UseInMemoryDatabase(databaseName: $"ItemsDatabase{Guid.NewGuid()}")
+                .Options;
+
+            using (var context = new ReviewsContext(options))
             {
-                Reviews = new List<Review>
-            { new Review { Rating = 8 }, new Review { Rating = 9 } }
-            };
 
-            IEnumerable<Item> items = new List<Item>() { item };
+                context.Items.Add(new Item { Name = "item", Reviews = new List<Review>() { new Review { Feedback = "smth", Rating = 3 } } });
+                context.SaveChanges();
+            }
 
-            _repository.Setup(m => m.GetByAverageReviewRatingGreaterThanAsync(4)).Returns(Task.FromResult(items));
-
-            var okResult = await _controller.GetReviewByAverageRatingGreaterThan(4) as OkObjectResult;
-
-            Assert.Equal(200, okResult.StatusCode);
+            using (var context = new ReviewsContext(options))
+            {
+                ItemRepository repo = new ItemRepository(context);
+                var _controller = new ReviewsController(repo, _mockLogger.Object, _mapper.Object);
+                var okResult = await _controller.GetReviewByAverageRatingGreaterThan(2) as OkObjectResult;
+                Assert.Equal(200, okResult.StatusCode);
+            }
         }
 
         [Fact]
         public async Task GetReviewsWithLowerRatingReturnsReviews()
         {
-            Item item = new Item
+
+            var options = new DbContextOptionsBuilder<ReviewsContext>()
+                .UseInMemoryDatabase(databaseName: $"ItemsDatabase{Guid.NewGuid()}")
+                .Options;
+
+            using (var context = new ReviewsContext(options))
             {
-                Reviews = new List<Review>
-            { new Review { Rating=2}, new Review { Rating= 1} }
-            };
 
-            IEnumerable<Item> items = new List<Item>() { item };
+                context.Items.Add(new Item { Name = "item", Reviews = new List<Review>() { new Review { Feedback = "smth", Rating = 3 } } });
+                context.SaveChanges();
+            }
 
-            _repository.Setup(m => m.GetByAverageReviewRatingLowerThanAsync(4)).Returns(Task.FromResult(items));
-
-            var okResult = await _controller.GetReviewByAverageRatingLowerThan(4) as OkObjectResult;
-
-            Assert.Equal(200, okResult.StatusCode);
+            using (var context = new ReviewsContext(options))
+            {
+                ItemRepository repo = new ItemRepository(context);
+                var _controller = new ReviewsController(repo, _mockLogger.Object, _mapper.Object);
+                var okResult = await _controller.GetReviewByAverageRatingLowerThan(2) as OkObjectResult;
+                Assert.Equal(200, okResult.StatusCode);
+            }
         }
     }
 }

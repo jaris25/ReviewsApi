@@ -15,7 +15,7 @@ namespace Reviews.Data.Contexts
         public ReviewsContext(DbContextOptions<ReviewsContext> options)
             : base(options)
         {
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
